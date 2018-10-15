@@ -6,8 +6,8 @@ namespace MiaoxingDoc\UserTag {
      * @property    \Miaoxing\UserTag\Service\UserTagModel $userTagModel UserTagModel
      * @method      \Miaoxing\UserTag\Service\UserTagModel|\Miaoxing\UserTag\Service\UserTagModel[] userTagModel()
      *
-     * @property    \Miaoxing\UserTag\Service\UserUserTagModel $userUserTagModel UserUserTagModel
-     * @method      \Miaoxing\UserTag\Service\UserUserTagModel|\Miaoxing\UserTag\Service\UserUserTagModel[] userUserTagModel()
+     * @property    \Miaoxing\UserTag\Service\UserTagsUserModel $userTagsUserModel UserUserTagModel
+     * @method      \Miaoxing\UserTag\Service\UserTagsUserModel|\Miaoxing\UserTag\Service\UserTagsUserModel[] userTagsUserModel()
      */
     class AutoComplete
     {
@@ -29,9 +29,9 @@ namespace {
     /** @var Miaoxing\UserTag\Service\UserTagModel|Miaoxing\UserTag\Service\UserTagModel[] $userTagModels */
     $userTags = wei()->userTagModel();
 
-    /** @var Miaoxing\UserTag\Service\UserUserTagModel $userUserTagModel */
-    $userUserTag = wei()->userUserTagModel();
+    /** @var Miaoxing\UserTag\Service\UserTagsUserModel $userTagsUserModel */
+    $userTagsUser = wei()->userTagsUserModel();
 
-    /** @var Miaoxing\UserTag\Service\UserUserTagModel|Miaoxing\UserTag\Service\UserUserTagModel[] $userUserTagModels */
-    $userUserTags = wei()->userUserTagModel();
+    /** @var Miaoxing\UserTag\Service\UserTagsUserModel|Miaoxing\UserTag\Service\UserTagsUserModel[] $userTagsUserModels */
+    $userTagsUsers = wei()->userTagsUserModel();
 }
