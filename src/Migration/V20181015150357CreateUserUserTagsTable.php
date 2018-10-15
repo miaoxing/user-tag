@@ -16,8 +16,8 @@ class V20181015150357CreateUserUserTagsTable extends BaseMigration
             ->int('app_id')
             ->int('user_id')
             ->int('tag_id')
-            ->timestamp('created_at')
-            ->timestamp('updated_at')
+            ->timestamps()
+            ->userstamps()
             ->exec();
     }
 

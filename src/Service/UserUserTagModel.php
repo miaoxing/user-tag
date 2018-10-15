@@ -3,6 +3,7 @@
 namespace Miaoxing\UserTag\Service;
 
 use Miaoxing\Plugin\BaseModelV2;
+use Miaoxing\Plugin\Model\HasAppIdTrait;
 use Miaoxing\UserTag\Metadata\UserUserTagTrait;
 
 /**
@@ -11,4 +12,5 @@ use Miaoxing\UserTag\Metadata\UserUserTagTrait;
 class UserUserTagModel extends BaseModelV2
 {
     use UserUserTagTrait;
+    use HasAppIdTrait;
 }
