@@ -11,7 +11,17 @@ class UserTags extends BaseController
 
     protected $controllerName = '用户标签管理';
 
-    protected $actionPermissions = [
-        'index' => '列表',
-    ];
+    public function updateUsersTagsAction($req)
+    {
+        foreach ((array) $req['userIds'] as $userId) {
+            foreach ((array) $req['tagIds'] as $tagId) {
+                wei()->userTagsUserModel()->findOrCreate([
+                    'user_id' => $userId,
+                    'tag_id' => $tagId,
+                ]);
+            }
+        }
+
+        return $this->suc();
+    }
 }
