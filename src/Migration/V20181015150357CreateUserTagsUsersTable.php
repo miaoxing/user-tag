@@ -26,6 +26,6 @@ class V20181015150357CreateUserTagsUsersTable extends BaseMigration
      */
     public function down()
     {
-        $this->schema->drop('user_user_tags');
+        $this->schema->drop('user_tags_users');
     }
 }

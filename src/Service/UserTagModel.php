@@ -11,4 +11,8 @@ use Miaoxing\UserTag\Metadata\UserTagTrait;
 class UserTagModel extends BaseModelV2
 {
     use UserTagTrait;
+
+    protected $data = [
+        'sort' => 50,
+    ];
 }

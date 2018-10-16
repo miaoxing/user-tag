@@ -10,6 +10,7 @@ namespace Miaoxing\UserTag\Metadata;
  * @property string $outId
  * @property string $name
  * @property int $sort
+ * @property int $userCount
  * @property string $createdAt
  * @property string $updatedAt
  * @property int $createdBy
@@ -27,6 +28,7 @@ trait UserTagTrait
         'out_id' => 'string',
         'name' => 'string',
         'sort' => 'int',
+        'user_count' => 'int',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'created_by' => 'int',
