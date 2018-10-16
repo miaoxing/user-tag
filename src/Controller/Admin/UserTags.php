@@ -4,12 +4,20 @@ namespace Miaoxing\UserTag\Controller\Admin;
 
 use Miaoxing\Admin\Action\CrudTrait;
 use Miaoxing\Plugin\BaseController;
+use Miaoxing\Plugin\BaseModelV2;
+use Miaoxing\Plugin\Service\Request;
 
 class UserTags extends BaseController
 {
     use CrudTrait;
 
     protected $controllerName = '用户标签管理';
+
+    protected function beforeSave(Request $req, BaseModelV2 $model)
+    {
+        $ret = wei()->event->until('beforeUserTagSave', [$model]);
+        return $ret ?: $this->suc();
+    }
 
     public function updateUsersTagsAction($req)
     {
