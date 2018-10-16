@@ -15,7 +15,13 @@ class UserTags extends BaseController
 
     protected function beforeSave(Request $req, BaseModelV2 $model)
     {
-        $ret = wei()->event->until('beforeUserTagSave', [$model]);
+        $ret = wei()->event->until('beforeUserTagSave', [$model, $req]);
+        return $ret ?: $this->suc();
+    }
+
+    protected function beforeDestroy(Request $req, BaseModelV2 $model)
+    {
+        $ret = wei()->event->until('beforeUserTagDestroy', [$model, $req]);
         return $ret ?: $this->suc();
     }
 
