@@ -3,6 +3,8 @@
 namespace MiaoxingDoc\UserTag {
 
     /**
+     * @property    \Miaoxing\UserTag\Service\UserTag $userTag UserTag
+     *
      * @property    \Miaoxing\UserTag\Service\UserTagModel $userTagModel UserTagModel
      * @method      \Miaoxing\UserTag\Service\UserTagModel|\Miaoxing\UserTag\Service\UserTagModel[] userTagModel()
      *
@@ -22,6 +24,9 @@ namespace {
     function wei()
     {
     }
+
+    /** @var Miaoxing\UserTag\Service\UserTag $userTag */
+    $userTag = wei()->userTag;
 
     /** @var Miaoxing\UserTag\Service\UserTagModel $userTagModel */
     $userTag = wei()->userTagModel();

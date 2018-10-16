@@ -24,4 +24,22 @@ class UserTags extends BaseController
 
         return $this->suc();
     }
+
+    public function replaceUserTagsAction($req)
+    {
+        $coll = [];
+        if ($req['tagIds']) {
+            foreach (explode(',', $req['tagIds']) as $tagId) {
+                $coll[] = [
+                    'tagId' => $tagId,
+                    'userId' => $req['userId'],
+                ];
+            }
+        }
+
+        $userTagsUsers = wei()->userTagsUserModel()->findAll(['user_id' => $req['userId']]);
+        $userTagsUsers->saveColl($coll);
+
+        return $this->suc();
+    }
 }
