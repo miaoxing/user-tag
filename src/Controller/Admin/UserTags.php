@@ -27,10 +27,17 @@ class UserTags extends BaseController
 
     public function updateUsersTagsAction($req)
     {
-        foreach ((array) $req['userIds'] as $userId) {
-            foreach ((array) $req['tagIds'] as $tagId) {
+        $users = wei()->userModel()->findAllByIds((array) $req['userIds']);
+        $addTagIds = (array) $req['tagIds'];
+        $ret = wei()->event->until('beforeUserTagsUserUpdate', [$users, $addTagIds, []]);
+        if ($ret && $ret['code'] !== 1) {
+            return $ret;
+        }
+
+        foreach ($users as $user) {
+            foreach ($addTagIds as $tagId) {
                 wei()->userTagsUserModel()->findOrCreate([
-                    'user_id' => $userId,
+                    'user_id' => $user->id,
                     'tag_id' => $tagId,
                 ]);
             }
@@ -45,10 +52,10 @@ class UserTags extends BaseController
         $userTagsUsers = wei()->userTagsUserModel()->findAll(['user_id' => $req['userId']]);
         $userTagIds = $userTagsUsers->getAll('tag_id');
 
-        $user = wei()->userModel()->findOneById($req['userId']);
+        $users = wei()->userModel()->findAllByIds($req['userId']);
         $addTagIds = array_diff($reqTagIds, $userTagIds);
         $deleteTagIds = array_diff($userTagIds, $reqTagIds);
-        $ret = wei()->event->until('beforeUserTagsUserUpdate', [$user, $userTagsUsers, $addTagIds, $deleteTagIds]);
+        $ret = wei()->event->until('beforeUserTagsUserUpdate', [$users, $addTagIds, $deleteTagIds]);
         if ($ret && $ret['code'] !== 1) {
             return $ret;
         }
