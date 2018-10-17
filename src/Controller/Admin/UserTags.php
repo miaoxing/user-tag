@@ -41,17 +41,25 @@ class UserTags extends BaseController
 
     public function replaceUserTagsAction($req)
     {
-        $coll = [];
-        if ($req['tagIds']) {
-            foreach (explode(',', $req['tagIds']) as $tagId) {
-                $coll[] = [
-                    'tagId' => $tagId,
-                    'userId' => $req['userId'],
-                ];
-            }
+        $reqTagIds = $req['tagIds'] ? explode(',', $req['tagIds']) : [];
+        $userTagsUsers = wei()->userTagsUserModel()->findAll(['user_id' => $req['userId']]);
+        $userTagIds = $userTagsUsers->getAll('tag_id');
+
+        $user = wei()->userModel()->findOneById($req['userId']);
+        $addTagIds = array_diff($reqTagIds, $userTagIds);
+        $deleteTagIds = array_diff($userTagIds, $reqTagIds);
+        $ret = wei()->event->until('beforeUserTagsUserUpdate', [$user, $userTagsUsers, $addTagIds, $deleteTagIds]);
+        if ($ret && $ret['code'] !== 1) {
+            return $ret;
         }
 
-        $userTagsUsers = wei()->userTagsUserModel()->findAll(['user_id' => $req['userId']]);
+        $coll = [];
+        foreach ($reqTagIds as $tagId) {
+            $coll[] = [
+                'tagId' => $tagId,
+                'userId' => $req['userId'],
+            ];
+        }
         $userTagsUsers->saveColl($coll);
 
         return $this->suc();
