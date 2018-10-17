@@ -28,22 +28,7 @@ class UserTags extends BaseController
     public function updateUsersTagsAction($req)
     {
         $users = wei()->userModel()->findAllByIds((array) $req['userIds']);
-        $addTagIds = (array) $req['tagIds'];
-        $ret = wei()->event->until('beforeUserTagsUserUpdate', [$users, $addTagIds, []]);
-        if ($ret && $ret['code'] !== 1) {
-            return $ret;
-        }
-
-        foreach ($users as $user) {
-            foreach ($addTagIds as $tagId) {
-                wei()->userTagsUserModel()->findOrCreate([
-                    'user_id' => $user->id,
-                    'tag_id' => $tagId,
-                ]);
-            }
-        }
-
-        return $this->suc();
+        return wei()->userTag->addTag($req['tagIds'], $users);
     }
 
     public function replaceUserTagsAction($req)
