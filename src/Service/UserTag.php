@@ -24,13 +24,16 @@ class UserTag extends BaseService
         return $this->tags;
     }
 
-    public function addTag($addTagIds = [], UserModel $users = null)
+    public function updateTag($addTagIds = [], $deleteTagIds = [], UserModel $users = null)
     {
+        $addTagIds = (array) $addTagIds;
+        $deleteTagIds = (array) $deleteTagIds;
+
         if (!$users) {
             $users = wei()->userModel()->findAllByIds(wei()->curUserV2->id);
         }
 
-        $ret = wei()->event->until('beforeUserTagsUserUpdate', [$users, $addTagIds, []]);
+        $ret = wei()->event->until('beforeUserTagsUserUpdate', [$users, $addTagIds, $deleteTagIds]);
         if ($ret && $ret['code'] !== 1) {
             return $ret;
         }
