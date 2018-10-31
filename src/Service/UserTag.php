@@ -15,6 +15,9 @@ class UserTag extends BaseService
 
     protected $tags = null;
 
+    /**
+     * @return UserTagModel|UserTagModel[]
+     */
     public function getAll()
     {
         if ($this->tags === null) {
