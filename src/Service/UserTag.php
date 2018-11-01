@@ -34,6 +34,10 @@ class UserTag extends BaseService
 
         if (!$users) {
             $users = wei()->userModel()->findAllByIds(wei()->curUserV2->id);
+        } elseif (!$users->isColl()) {
+            $coll = wei()->userModel()->beColl();
+            $coll[] = $users;
+            $users = $coll;
         }
 
         $ret = wei()->event->until('beforeUserTagsUserUpdate', [$users, $addTagIds, $deleteTagIds]);
