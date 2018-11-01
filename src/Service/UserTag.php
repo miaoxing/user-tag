@@ -52,6 +52,12 @@ class UserTag extends BaseService
                     'tag_id' => $tagId,
                 ]);
             }
+            foreach ($deleteTagIds as $tagId) {
+                wei()->userTagsUserModel()->destroy([
+                    'user_id' => $user->id,
+                    'tag_id' => $tagId,
+                ]);
+            }
         }
 
         return $this->suc();
