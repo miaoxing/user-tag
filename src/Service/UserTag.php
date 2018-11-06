@@ -15,6 +15,17 @@ class UserTag extends BaseService
 
     protected $tags = null;
 
+    protected $hasTags = [];
+
+    public function hasTag()
+    {
+        $user = wei()->curUserV2;
+        if (!isset($this->hasTags[$user->id])) {
+            $this->hasTags[$user->id] = (bool) wei()->userTagsUserModel()->fetchColumn(['user_id' => $user->id]);
+        }
+        return $this->hasTags[$user->id];
+    }
+
     /**
      * @return UserTagModel|UserTagModel[]
      */
