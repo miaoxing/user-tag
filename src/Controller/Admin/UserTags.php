@@ -34,7 +34,7 @@ class UserTags extends BaseController
     public function replaceUserTagsAction($req)
     {
         $reqTagIds = $req['tagIds'] ? explode(',', $req['tagIds']) : [];
-        $userTagsUsers = wei()->userTagsUserModel()->findAll(['user_id' => $req['userId']]);
+        $userTagsUsers = wei()->userTagsUserModel()->asc('id')->findAll(['user_id' => $req['userId']]);
         $userTagIds = $userTagsUsers->getAll('tag_id');
 
         $users = wei()->userModel()->findAllByIds($req['userId']);
