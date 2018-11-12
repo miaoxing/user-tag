@@ -21,7 +21,7 @@ export default class extends React.Component {
   }
 
   render() {
-    return <React.Fragment>
+    return <>
       <PageHeader>
         <div className="pull-right">
           <CListBtn/>
@@ -38,6 +38,6 @@ export default class extends React.Component {
 
         <FormAction/>
       </Form>
-    </React.Fragment>;
+    </>;
   }
 }

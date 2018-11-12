@@ -24,7 +24,7 @@ export default class extends React.Component {
   };
 
   render() {
-    return <React.Fragment>
+    return <>
       <PageHeader>
         <div className="pull-right">
           <Actions>
@@ -54,6 +54,6 @@ export default class extends React.Component {
           },
         ]}
       />
-    </React.Fragment>;
+    </>;
   }
 }
