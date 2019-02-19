@@ -1,12 +1,13 @@
 import React from "react";
 import app from 'app';
-import {Button, PageHeader} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import Table from "components/Table";
 import CNewBtn from "components/CNewBtn";
 import Actions from "components/Actions";
 import CEditLink from "components/CEditLink";
 import CDeleteLink from "components/CDeleteLink";
 import {withTable} from "components/TableProvider";
+import PageHeader from "components/PageHeader";
 
 @withTable
 export default class extends React.Component {
@@ -26,13 +27,10 @@ export default class extends React.Component {
   render() {
     return <>
       <PageHeader>
-        <div className="pull-right">
-          <Actions>
-            <Button onClick={this.sync}>同步微信标签</Button>
-            <CNewBtn/>
-          </Actions>
-        </div>
-        {wei.page.controllerTitle}
+        <Actions>
+          <Button onClick={this.sync}>同步微信标签</Button>
+          <CNewBtn/>
+        </Actions>
       </PageHeader>
 
       <Table
