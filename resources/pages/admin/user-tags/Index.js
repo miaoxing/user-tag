@@ -28,7 +28,7 @@ export default class extends React.Component {
     return <>
       <PageHeader>
         <Actions>
-          <Button onClick={this.sync}>同步微信标签</Button>
+          <Button variant="secondary" onClick={this.sync}>同步微信标签</Button>
           <CNewBtn/>
         </Actions>
       </PageHeader>
