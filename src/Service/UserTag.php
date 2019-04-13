@@ -73,4 +73,14 @@ class UserTag extends BaseService
 
         return $this->suc();
     }
+
+    public function getSelects()
+    {
+        $tags = [];
+        $userTags = wei()->userTag->getAll();
+        foreach ($userTags as $userTag) {
+            $tags[] = ['id' => $userTag->id, 'text' => $userTag->name];
+        }
+        return $tags;
+    }
 }
