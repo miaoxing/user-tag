@@ -6,10 +6,15 @@ import CNewBtn from "components/CNewBtn";
 import Actions from "components/Actions";
 import CEditLink from "components/CEditLink";
 import CDeleteLink from "components/CDeleteLink";
-import {withTable} from "components/TableProvider";
+import TableProvider from "components/TableProvider";
 import PageHeader from "components/PageHeader";
+import SearchForm from "components/SearchForm";
+import SearchItem from "components/SearchItem";
+import { createBrowserHistory } from 'history';
+const history = createBrowserHistory();
 
-@withTable
+const ModalLink = window.ModalLink;
+
 export default class extends React.Component {
   sync = () => {
     app.get(app.url('admin/wechat-tags/sync-from-wechat'))
@@ -24,8 +29,14 @@ export default class extends React.Component {
       });
   };
 
+  handleClick = () => {
+    history.push(app.curEditUrl(1), { some: 'state' });
+  }
+
   render() {
     return <>
+      <button onClick={this.handleClick}>点击</button>
+
       <PageHeader>
         <Actions>
           <Button variant="secondary" onClick={this.sync}>同步微信标签</Button>
@@ -33,25 +44,34 @@ export default class extends React.Component {
         </Actions>
       </PageHeader>
 
-      <Table
-        columns={[
-          {
-            text: '名称',
-            dataField: 'name',
-          },
-          {
-            text: '顺序',
-            dataField: 'sort'
-          },
-          {
-            text: '操作',
-            formatter: (cell, {id}) => <Actions>
-              <CEditLink id={id}/>
-              <CDeleteLink id={id}/>
-            </Actions>
-          },
-        ]}
-      />
+
+      <TableProvider>
+        <SearchForm>
+          <SearchItem label="名称" name="name$ct"/>
+        </SearchForm>
+
+        <Table
+          url={app.curIndexUrl()}
+          columns={[
+            {
+              text: '名称',
+              dataField: 'name',
+            },
+            {
+              text: '顺序',
+              dataField: 'sort'
+            },
+            {
+              text: '操作',
+              formatter: (cell, {id}) => <Actions>
+                <CEditLink id={id}/>
+                <ModalLink to={app.curEditUrl(id)}>编辑</ModalLink>
+                <CDeleteLink id={id}/>
+              </Actions>
+            },
+          ]}
+        />
+      </TableProvider>
     </>;
   }
 }

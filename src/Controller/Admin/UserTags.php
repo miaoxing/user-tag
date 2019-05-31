@@ -13,6 +13,11 @@ class UserTags extends BaseController
 
     protected $controllerName = '用户标签管理';
 
+    protected function beforeIndexFind(Request $req, BaseModelV2 $models)
+    {
+        $models->reqQuery();
+    }
+
     protected function beforeSave(Request $req, BaseModelV2 $model)
     {
         $ret = wei()->event->until('beforeUserTagSave', [$model, $req]);
