@@ -10,8 +10,7 @@ import TableProvider from "components/TableProvider";
 import PageHeader from "components/PageHeader";
 import SearchForm from "components/SearchForm";
 import SearchItem from "components/SearchItem";
-
-const ModalLink = window.ModalLink;
+import ModalLink from "components/ModalLink";
 
 export default class extends React.Component {
   sync = () => {
