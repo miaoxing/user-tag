@@ -10,8 +10,6 @@ import TableProvider from "components/TableProvider";
 import PageHeader from "components/PageHeader";
 import SearchForm from "components/SearchForm";
 import SearchItem from "components/SearchItem";
-import { createBrowserHistory } from 'history';
-const history = createBrowserHistory();
 
 const ModalLink = window.ModalLink;
 
@@ -29,21 +27,14 @@ export default class extends React.Component {
       });
   };
 
-  handleClick = () => {
-    history.push(app.curEditUrl(1), { some: 'state' });
-  }
-
   render() {
     return <>
-      <button onClick={this.handleClick}>点击</button>
-
       <PageHeader>
         <Actions>
           <Button variant="secondary" onClick={this.sync}>同步微信标签</Button>
           <CNewBtn/>
         </Actions>
       </PageHeader>
-
 
       <TableProvider>
         <SearchForm>
