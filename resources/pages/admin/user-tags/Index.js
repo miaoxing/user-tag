@@ -8,10 +8,6 @@ import CEditLink from "components/CEditLink";
 import CDeleteLink from "components/CDeleteLink";
 import TableProvider, {withTable} from "components/TableProvider";
 import PageHeader from "components/PageHeader";
-import SearchForm from "components/SearchForm";
-import SearchItem from "components/SearchItem";
-import ModalLink from "components/ModalLink";
-import ModalEvent from "components/ModalEvent";
 
 @withTable
 export default class extends React.Component {
@@ -28,10 +24,6 @@ export default class extends React.Component {
       });
   };
 
-  handleExit = () => {
-    this.props.table.reload();
-  };
-
   render() {
     return <>
       <PageHeader>
@@ -41,9 +33,8 @@ export default class extends React.Component {
         </Actions>
       </PageHeader>
 
-      <ModalEvent onExit={this.handleExit}/>
-
       <Table
+        reloadOnModalExit
         columns={[
           {
             text: '名称',
