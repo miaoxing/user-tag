@@ -14,6 +14,13 @@ import ModalLink from "components/ModalLink";
 
 @withTable
 export default class extends React.Component {
+  componentDidMount() {
+    this.props.history.listen((location, action) => {
+      // location is an object like window.location
+      console.log('x', action, location.pathname, location.state);
+    });
+  }
+
   sync = () => {
     app.get(app.url('admin/wechat-tags/sync-from-wechat'))
       .then(ret => {
