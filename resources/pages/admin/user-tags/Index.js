@@ -32,7 +32,7 @@ export default class extends React.Component {
       <PageHeader>
         <Actions>
           <Button variant="secondary" onClick={this.sync}>同步微信标签</Button>
-          <CNewBtn/>
+          <CNewBtn modal/>
         </Actions>
       </PageHeader>
 
