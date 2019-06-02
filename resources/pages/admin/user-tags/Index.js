@@ -11,16 +11,10 @@ import PageHeader from "components/PageHeader";
 import SearchForm from "components/SearchForm";
 import SearchItem from "components/SearchItem";
 import ModalLink from "components/ModalLink";
+import ModalEvent from "components/ModalEvent";
 
 @withTable
 export default class extends React.Component {
-  componentDidMount() {
-    this.props.history.listen((location, action) => {
-      // location is an object like window.location
-      console.log('x', action, location.pathname, location.state);
-    });
-  }
-
   sync = () => {
     app.get(app.url('admin/wechat-tags/sync-from-wechat'))
       .then(ret => {
@@ -34,6 +28,10 @@ export default class extends React.Component {
       });
   };
 
+  handleExit = () => {
+    this.props.table.reload();
+  };
+
   render() {
     return <>
       <PageHeader>
@@ -42,6 +40,8 @@ export default class extends React.Component {
           <CNewBtn modal/>
         </Actions>
       </PageHeader>
+
+      <ModalEvent onExit={this.handleExit}/>
 
       <Table
         columns={[
